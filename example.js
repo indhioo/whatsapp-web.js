@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { Client, Location } = require('./index');
+const  qrcode = require('qrcode-terminal');
 
 const SESSION_FILE_PATH = './session.json';
 let sessionCfg;
@@ -16,6 +17,7 @@ client.initialize();
 client.on('qr', (qr) => {
     // NOTE: This event will not be fired if a session is specified.
     console.log('QR RECEIVED', qr);
+    qrcode.generate(qr, { small: true });
 });
 
 client.on('authenticated', (session) => {
